@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TodoApi.Models;
+using System;
 
 namespace TodoApi.Controllers
 {
@@ -25,6 +26,7 @@ namespace TodoApi.Controllers
             {
                 _context.TodoItems.Add(new TodoItem { Name = "Item1" });
                 _context.SaveChanges();
+                Console.WriteLine("TODO APP initialized");
             }
         }
 
@@ -46,6 +48,7 @@ namespace TodoApi.Controllers
                 return NotFound();
             }
 
+            Console.WriteLine("Got all TODO Items");
             return todoItem;
         }
 
@@ -65,6 +68,7 @@ namespace TodoApi.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                Console.WriteLine("TODO Item updated");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -105,7 +109,7 @@ namespace TodoApi.Controllers
 
             _context.TodoItems.Remove(todoItem);
             await _context.SaveChangesAsync();
-
+            Console.WriteLine("TODO Item added");
             return todoItem;
         }
 
